@@ -22,14 +22,14 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'clean install'
 - task: CopyFiles@2
-  displayName: 'Copy Files'
+  displayName: 'Copy jar File'
   inputs:
     SourceFolder: '$(system.defaultworkingdirectory)'
     Contents: '**/*.jar'
     TargetFolder: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
 - task: AmazonWebServices.aws-vsts-tools.LambdaDeployFunction.LambdaDeployFunction@1
-  displayName: 'Deploy Lambda Function: arn:aws:lambda:ap-south-1:423181991362:function:poc-azure-devops-lambda'
+  displayName: 'Deploy on Lambda Function'
   inputs:
     awsCredentials: 'azure-lambda-push-connection'
     regionName: 'ap-south-1'
