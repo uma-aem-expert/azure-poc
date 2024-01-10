@@ -11,7 +11,6 @@ pool:
 
 steps:
 - task: Maven@3
-  displayName: 'Code build'
   inputs:
     mavenPomFile: 'azure-poc/pom.xml'
     mavenOptions: '-Xmx3072m'
@@ -22,17 +21,16 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'clean install'
 - task: CopyFiles@2
-  displayName: 'Copy jar file'
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
   inputs:
     SourceFolder: '$(system.defaultworkingdirectory)'
     Contents: '**/*.jar'
     TargetFolder: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
 - task: AmazonWebServices.aws-vsts-tools.LambdaDeployFunction.LambdaDeployFunction@1
-  displayName: 'Deploy on Lambda Function'
+  displayName: 'Deploy Lambda Function: arn:aws:lambda:ap-south-1:423181991362:function:poc-azure-devops-lambda'
   inputs:
     awsCredentials: 'azure-lambda-push-connection'
     regionName: 'ap-south-1'
     functionName: 'arn:aws:lambda:ap-south-1:423181991362:function:poc-azure-devops-lambda'
     localZipFile: '$(build.artifactstagingdirectory)/azure-poc/target/azure.poc.microservice.jar'
-	condition: succeededOrFailed()
