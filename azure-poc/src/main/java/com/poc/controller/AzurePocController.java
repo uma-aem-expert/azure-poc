@@ -9,7 +9,7 @@ public class AzurePocController {
 	@GetMapping("/message")
 	public String getMessage() {
 		
-		return "This is the final build";
+		return "This is the another build";
 	}
 
 }
