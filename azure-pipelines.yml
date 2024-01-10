@@ -32,4 +32,11 @@ steps:
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
+- task: AmazonWebServices.aws-vsts-tools.LambdaDeployFunction.LambdaDeployFunction@1
+  displayName: 'Deploy Lambda Function: arn:aws:lambda:ap-south-1:423181991362:function:poc-azure-devops-lambda'
+  inputs:
+    awsCredentials: 'azure-lambda-push-connection'
+    regionName: 'ap-south-1'
+    functionName: 'arn:aws:lambda:ap-south-1:423181991362:function:poc-azure-devops-lambda'
+    localZipFile: '$(build.artifactstagingdirectory)'
 
