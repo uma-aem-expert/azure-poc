@@ -9,7 +9,7 @@ public class AzurePocController {
 	@GetMapping("/message")
 	public String getMessage() {
 		
-		return "This is the POC message";
+		return "I am giving the Azure DevOps Demo!!";
 	}
 
 }
