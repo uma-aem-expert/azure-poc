@@ -38,5 +38,5 @@ steps:
     awsCredentials: 'azure-lambda-push-connection'
     regionName: 'ap-south-1'
     functionName: 'arn:aws:lambda:ap-south-1:423181991362:function:poc-azure-devops-lambda'
-    localZipFile: '$(build.artifactstagingdirectory)'
+    localZipFile: '$(build.artifactstagingdirectory)/azure.poc.microservice.jar'
 
