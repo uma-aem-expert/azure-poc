@@ -11,6 +11,7 @@ pool:
 
 steps:
 - task: Maven@3
+  displayName: 'Code Build'
   inputs:
     mavenPomFile: 'azure-poc/pom.xml'
     mavenOptions: '-Xmx3072m'
@@ -21,7 +22,7 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'clean install'
 - task: CopyFiles@2
-  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+  displayName: 'Copy Files'
   inputs:
     SourceFolder: '$(system.defaultworkingdirectory)'
     Contents: '**/*.jar'
@@ -34,3 +35,4 @@ steps:
     regionName: 'ap-south-1'
     functionName: 'arn:aws:lambda:ap-south-1:423181991362:function:poc-azure-devops-lambda'
     localZipFile: '$(build.artifactstagingdirectory)/azure-poc/target/azure.poc.microservice.jar'
+    condition: succeededOrFailed()
