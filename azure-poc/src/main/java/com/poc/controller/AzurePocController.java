@@ -9,7 +9,7 @@ public class AzurePocController {
 	@GetMapping("/message")
 	public String getMessage() {
 		
-		return "This is the master brach commit";
+		return "Master branch is running on lambda, manual build : 01/11/2024";
 	}
 
 }
