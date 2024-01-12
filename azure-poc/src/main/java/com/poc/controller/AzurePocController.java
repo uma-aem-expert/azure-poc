@@ -9,7 +9,7 @@ public class AzurePocController {
 	@GetMapping("/message")
 	public String getMessage() {
 		
-		return "Master branch is running on lambda, manual build : 01/11/2024";
+		return "Master branch is running on lambda, manual build : 01/12/2024 ???????";
 	}
 
 }
